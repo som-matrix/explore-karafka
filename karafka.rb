@@ -3,7 +3,7 @@
 class KarafkaApp < Karafka::App
   setup do |config|
     # connect to redpanda server running at localhost:9092
-    config.kafka = { 'bootstrap.servers': 'localhost:19092' }
+    config.kafka = { 'bootstrap.servers': '127.0.0.1:19092' }
     config.client_id = 'example_app'
     # Recreate consumers with each batch. This will allow Rails code reload to work in the
     # development mode. Otherwise Karafka process would not be aware of code changes
@@ -60,13 +60,13 @@ class KarafkaApp < Karafka::App
     # Uncomment this if you use Karafka with ActiveJob
     # You need to define the topic per each queue name you use
     # active_job_topic :default
-    topic :example do
+    topic :chat do
       # Uncomment this if you want Karafka to manage your topics configuration
       # Managing topics configuration via routing will allow you to ensure config consistency
       # across multiple environments
       #
       # config(partitions: 2, 'cleanup.policy': 'compact')
-      consumer ExampleConsumer
+      consumer ChatConsumer
     end
   end
 end

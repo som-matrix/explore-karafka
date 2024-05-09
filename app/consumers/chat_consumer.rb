@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-# ChatRoom consumer that prints messages payloads
-class ChatRoomConsumer < ApplicationConsumer
+# Chat consumer that prints messages payloads
+class ChatConsumer < ApplicationConsumer
   def consume
-    messages.each { |message| puts message.payload }
+    messages.each do |message|
+        puts message.payload
+    end
   end
 
   # Run anything upon partition being revoked
